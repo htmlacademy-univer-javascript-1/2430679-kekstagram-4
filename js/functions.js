@@ -1,25 +1,25 @@
-function isLessOrEqual (string, maxLength){
-  return string.length <= maxLength;
-}
+const isLessOrEqual = (string, maxLength) => string.length <= maxLength;
+
 isLessOrEqual('проверяемая строка', 20);
 isLessOrEqual('проверяемая строка', 18);
 isLessOrEqual('проверяемая строка', 10);
 
-function isPalindrom (passedString){
+const isPalindrom = (passedString) => {
   const string = passedString.replaceAll(' ','').toLowerCase();
-  let emptyString = '';
-  for (let i = string.length - 1; i >= 0; i--){
-    emptyString += string[i];
+  for (let i = 0; i < string.length / 2; i++){
+    if (string.at(i) !== string.at(-i - 1)){
+      return false;
+    }
   }
-  return string === emptyString;
-}
+  return true;
+};
 
 isPalindrom('топот');
 isPalindrom('ДовОд');
 isPalindrom('Кекс');
 isPalindrom('Лёша на полке клопа нашёл ');
 
-function extractNumber (arg){
+const extractNumber = (arg) => {
   const string = arg.toString();
   let result = '';
   for(let i = 0; i < string.length; i++){
@@ -28,7 +28,7 @@ function extractNumber (arg){
     }
   }
   return parseInt(result, 10);
-}
+};
 
 extractNumber('2023 год');
 extractNumber('ECMAScript 2022');
