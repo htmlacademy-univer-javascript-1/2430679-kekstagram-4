@@ -45,3 +45,14 @@ const MESSAGES = [
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
+
+const getRandomInteger = (numb1, numb2) => {
+  const lower = Math.ceil(Math.min(numb1, numb2));
+  const upper = Math.floor(Math.max(numb1, numb2));
+  const result = Math.random() * (upper - lower + 1) + lower;
+  return Math.floor(result);
+};
+
+console.log(getRandomInteger(1,25));
+console.log(getRandomInteger(1,25));
+console.log(getRandomInteger(1,25));
