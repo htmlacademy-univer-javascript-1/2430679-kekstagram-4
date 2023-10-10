@@ -87,4 +87,13 @@ const createRandomComments = (count) => {
   return result;
 };
 
-console.log(createRandomComments(getRandomInteger(0, 30)));
+const createImage = () => ({
+  id: imageId(),
+  url: createImageUrl(imageUrl(), 'photos/', '.jpg'),
+  description: DESCRIPTIONS[getRandomInteger(0, DESCRIPTIONS.length - 1)],
+  likes: getRandomInteger(15, 200),
+  comments: createRandomComments(getRandomInteger(0, 30)),
+});
+
+const photos = Array.from( {length: 25}, createImage);
+console.log(photos);
