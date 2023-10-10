@@ -64,11 +64,27 @@ const createUniqueInteger = (numb1, numb2) => {
     return currentValue;
   };
 };
-const imageIdTest = createUniqueInteger(1, 25);
-for (let i = 1; i < 26; i++) {
-  console.log(imageIdTest());
-}
+
 const imageId = createUniqueInteger(1, 25);
 const imageUrl = createUniqueInteger(1, 25);
 
 const createImageUrl = (url, derictory, format) => derictory + url + format;
+
+const createRandomComment = (generatorId, generatorUrl) => ({
+  id: generatorId(),
+  avatar: createImageUrl(generatorUrl(), 'img/avatar-', '.svg'),
+  name: NAMES[getRandomInteger(0, NAMES.length - 1)],
+  message: MESSAGES[getRandomInteger(0, MESSAGES.length - 1)],
+});
+
+const createRandomComments = (count) => {
+  const result = [];
+  const commentId = createUniqueInteger(1, count);
+  for(let i = 0; i < count; i++) {
+    const commentAvatar = createUniqueInteger(1, 6);
+    result.push(createRandomComment(commentId, commentAvatar));
+  }
+  return result;
+};
+
+console.log(createRandomComments(getRandomInteger(0, 30)));
