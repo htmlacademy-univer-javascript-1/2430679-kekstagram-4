@@ -1,4 +1,4 @@
-/* прим фото
+/* прим фото (фун 6 - создать фото)
 id - случ число 1-25 - генерация числа в промежутке (фун1) и проверка на появление ранее (фун2)
 url - адрес фото 1-25 (не обяз совпадает с id) - (фун1), (фун2) и как-то соединить (фун3)
 des - описание придумать мб любое - (фун1)
@@ -53,6 +53,22 @@ const getRandomInteger = (numb1, numb2) => {
   return Math.floor(result);
 };
 
-console.log(getRandomInteger(1,25));
-console.log(getRandomInteger(1,25));
-console.log(getRandomInteger(1,25));
+const createUniqueInteger = (numb1, numb2) => {
+  const previousValues = [];
+  return () => {
+    let currentValue = getRandomInteger(numb1, numb2);
+    while (previousValues.includes(currentValue)) {
+      currentValue = getRandomInteger(numb1, numb2);
+    }
+    previousValues.push(currentValue);
+    return currentValue;
+  };
+};
+const imageIdTest = createUniqueInteger(1, 25);
+for (let i = 1; i < 26; i++) {
+  console.log(imageIdTest());
+}
+const imageId = createUniqueInteger(1, 25);
+const imageUrl = createUniqueInteger(1, 25);
+
+const createImageUrl = (url, derictory, format) => derictory + url + format;
