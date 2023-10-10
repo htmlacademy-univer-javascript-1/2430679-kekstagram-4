@@ -88,5 +88,4 @@ const createImage = () => ({
   comments: createRandomComments(getRandomInteger(0, COMMENTS_MAX)),
 });
 
-createImage();
-//const photos = Array.from({length: PHOTOS_COUNT}, createImage);
+const photos = Array.from({length: PHOTOS_COUNT}, createImage);
