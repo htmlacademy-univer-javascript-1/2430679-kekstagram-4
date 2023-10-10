@@ -90,5 +90,5 @@ const createImage = () => ({
 
 const createArray = () => {
   return Array.from({length: PHOTOS_COUNT}, createImage);
-}
+};
 createArray();
