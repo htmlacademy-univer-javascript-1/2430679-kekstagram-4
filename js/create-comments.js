@@ -1,4 +1,4 @@
-import {NAMES, MESSAGES, AVATARS_NUMBER} from './data.js';
+import {NAMES, MESSAGES, AVATARS_NUMBER} from './consts.js';
 import {getRandomInteger, createUniqueInteger, createImageUrl} from './utils.js';
 
 const createRandomComment = (generatorId, generatorUrl) => ({
