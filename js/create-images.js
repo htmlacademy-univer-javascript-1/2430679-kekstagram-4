@@ -1,6 +1,11 @@
-import {DESCRIPTIONS, PHOTOS_COUNT, COMMENTS, LIKES} from './consts.js';
+import {getDescriptions, getPhotosCount, getComments, getLikes} from './data.js';
 import {getRandomInteger, createUniqueInteger, createImageUrl} from './utils.js';
 import {createRandomComments} from './create-comments.js';
+
+const DESCRIPTIONS = getDescriptions();
+const PHOTOS_COUNT = getPhotosCount();
+const COMMENTS = getComments();
+const LIKES = getLikes();
 
 const imageId = createUniqueInteger(1, PHOTOS_COUNT);
 const imageUrl = createUniqueInteger(1, PHOTOS_COUNT);

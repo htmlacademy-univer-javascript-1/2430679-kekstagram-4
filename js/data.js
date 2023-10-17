@@ -1,4 +1,4 @@
-const DESCRIPTIONS = [
+const getDescriptions = () => [
   'Что-то на богатом',
   'Мне этот мир абсолютно понятен',
   'Позитивная энергия',
@@ -11,7 +11,7 @@ const DESCRIPTIONS = [
   'Ноу дескрипшион',
 ];
 
-const NAMES = [
+const getNames = () => [
   'Богдан',
   'Мухтар',
   'Стася',
@@ -24,7 +24,7 @@ const NAMES = [
   'Лулу',
 ];
 
-const MESSAGES = [
+const getMessages = () => [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -33,21 +33,21 @@ const MESSAGES = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
-const PHOTOS_COUNT = 25;
+const getPhotosCount = () => 25;
 
-const COMMENTS = {
+const getComments = () => ({
   MIN: 0,
   MAX: 30
-};
+});
 
-const LIKES = {
+const getLikes = () => ({
   MIN: 15,
   MAX: 200
-};
+});
 
-const AVATARS_NUMBER = {
+const getAvatarsNumber = () => ({
   MIN: 1,
   MAX: 6
-};
+});
 
-export {DESCRIPTIONS, NAMES, MESSAGES, PHOTOS_COUNT, COMMENTS, LIKES, AVATARS_NUMBER};
+export {getDescriptions, getNames, getMessages, getPhotosCount, getComments, getLikes, getAvatarsNumber};
