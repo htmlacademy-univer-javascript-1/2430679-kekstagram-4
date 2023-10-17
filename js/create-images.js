@@ -1,4 +1,4 @@
-import { DESCRIPTIONS, PHOTOS_COUNT, COMMENTS, LIKES} from './data.js';
+import {DESCRIPTIONS, PHOTOS_COUNT, COMMENTS, LIKES} from './data.js';
 import {getRandomInteger, createUniqueInteger, createImageUrl} from './utils.js';
 import {createRandomComments} from './create-comments.js';
 
