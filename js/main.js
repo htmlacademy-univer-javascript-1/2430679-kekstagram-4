@@ -1,2 +1,2 @@
-import {createArray} from './data.js';
+import {createArray} from './create-images.js';
 createArray();
