@@ -1,9 +1,8 @@
-import {descriptions, photosCount, comments, likes} from './data.js';
+import {descriptions, PHOTOS_COUNT, comments, likes} from './data.js';
 import {getRandomInteger, createUniqueInteger, createImageUrl} from './utils.js';
 import {createRandomComments} from './create-comments.js';
 
 const DESCRIPTIONS = descriptions();
-const PHOTOS_COUNT = photosCount();
 const COMMENTS = comments();
 const LIKES = likes();
 

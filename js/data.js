@@ -1,10 +1,12 @@
+const PHOTOS_COUNT = 25;
+
 const descriptions = () => [
   'Что-то на богатом',
   'Мне этот мир абсолютно понятен',
   'Позитивная энергия',
   'Спокойно, Маша, я Дубровский',
   'Природы мистическая красота',
-  'На радио волнах',
+  'На радиоволнах',
   'Я знаю точно: невозможное возможно',
   'Творческая жилка',
   'Меме',
@@ -33,8 +35,6 @@ const messages = () => [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
-const photosCount = () => 25;
-
 const comments = () => ({
   MIN: 0,
   MAX: 30
@@ -50,4 +50,4 @@ const avatarsNumber = () => ({
   MAX: 6
 });
 
-export {descriptions, names, messages, photosCount, comments, likes, avatarsNumber};
+export {PHOTOS_COUNT, descriptions, names, messages, comments, likes, avatarsNumber};
