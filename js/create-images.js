@@ -1,23 +1,24 @@
-import {descriptions, photosCount, comments, likes} from './data.js';
+import {getData} from './data.js';
 import {getRandomInteger, createUniqueInteger, createImageUrl} from './utils.js';
-import {createRandomComments} from './create-comments.js';
+import {getComments} from './create-comments.js';
 
-const DESCRIPTIONS = descriptions();
-const PHOTOS_COUNT = photosCount();
-const COMMENTS = comments();
-const LIKES = likes();
+const data = getData();
+const IMAGES_COUNT = data.IMAGES_COUNT;
+const DESCRIPTIONS = data.DESCRIPTIONS;
+const COMMENTS = data.COMMENTS;
+const LIKES = data.LIKES;
 
-const imageId = createUniqueInteger(1, PHOTOS_COUNT);
-const imageUrl = createUniqueInteger(1, PHOTOS_COUNT);
+const imageId = createUniqueInteger(1, IMAGES_COUNT);
+const imageUrl = createUniqueInteger(1, IMAGES_COUNT);
 
 const createImage = () => ({
   id: imageId(),
   url: createImageUrl(imageUrl(), 'photos/', '.jpg'),
   description: DESCRIPTIONS[getRandomInteger(0, DESCRIPTIONS.length - 1)],
   likes: getRandomInteger(LIKES.MIN, LIKES.MAX),
-  comments: createRandomComments(getRandomInteger(COMMENTS.MIN, COMMENTS.MAX)),
+  comments: getComments(getRandomInteger(COMMENTS.MIN, COMMENTS.MAX)),
 });
 
-const createArray = () => Array.from({length: PHOTOS_COUNT}, createImage);
+const getImages = () => Array.from({length: IMAGES_COUNT}, createImage);
 
-export {createArray};
+export {getImages};
