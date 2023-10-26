@@ -38,3 +38,21 @@ extractNumber('а я томат');
 extractNumber(2023);
 extractNumber(-1);
 extractNumber(1.5);
+
+const getMinutes = (time) => {
+  const result = time.split(':');
+  return parseInt(result[0], 10) * 60 + parseInt(result[1], 10);
+};
+
+const checkMeetingAccuracy = (startDay, endDay, startMeet, meetLength) => {
+  const startMinutes = getMinutes(startDay);
+  const endMinutes = getMinutes(endDay);
+  const startMeetMinutes = getMinutes(startMeet);
+  return startMeetMinutes >= startMinutes && startMeetMinutes + meetLength <= endMinutes;
+};
+
+checkMeetingAccuracy('08:00', '17:30', '14:00', 90);
+checkMeetingAccuracy('8:0', '10:0', '8:0', 120);
+checkMeetingAccuracy('08:00', '14:30', '14:00', 90);
+checkMeetingAccuracy('14:00', '17:30', '08:0', 90);
+checkMeetingAccuracy('8:00', '17:30', '08:00', 900);
