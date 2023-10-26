@@ -1,9 +1,10 @@
-import {names, messages, avatarsNumber} from './data.js';
+import {getData} from './data.js';
 import {getRandomInteger, createUniqueInteger, createImageUrl} from './utils.js';
 
-const NAMES = names();
-const MESSAGES = messages();
-const AVATARS_NUMBER = avatarsNumber();
+const data = getData();
+const NAMES = data.NAMES;
+const MESSAGES = data.MESSAGES;
+const AVATARS_NUMBER = data.AVATARS_NUMBER;
 
 const createRandomComment = (generatorId, generatorUrl) => ({
   id: generatorId(),
@@ -12,7 +13,7 @@ const createRandomComment = (generatorId, generatorUrl) => ({
   message: MESSAGES[getRandomInteger(0, MESSAGES.length - 1)],
 });
 
-const createRandomComments = (count) => {
+const getComments = (count) => {
   const result = [];
   const commentId = createUniqueInteger(1, count);
   for(let i = 0; i < count; i++) {
@@ -22,4 +23,4 @@ const createRandomComments = (count) => {
   return result;
 };
 
-export {createRandomComments};
+export {getComments};
