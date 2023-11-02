@@ -1,2 +1,3 @@
-import {getImages} from './create-images.js';
-getImages();
+import {getImages} from './images.js';
+import {createPictures} from './pictures.js';
+createPictures(getImages());
