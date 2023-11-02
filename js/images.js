@@ -1,6 +1,6 @@
 import {getData} from './data.js';
 import {getRandomInteger, createUniqueInteger, createImageUrl} from './utils.js';
-import {getComments} from './create-comments.js';
+import {getComments} from './comments.js';
 
 const data = getData();
 const IMAGES_COUNT = data.IMAGES_COUNT;
