@@ -1,5 +1,5 @@
 import {getData} from './data.js';
-import {getRandomInteger, createUniqueInteger, createImageUrl} from './utils.js';
+import {getRandomInteger, getOrdinalNumber, getUrl} from './utils.js';
 import {getComments} from './comments.js';
 
 const data = getData();
@@ -8,12 +8,12 @@ const DESCRIPTIONS = data.DESCRIPTIONS;
 const COMMENTS = data.COMMENTS;
 const LIKES = data.LIKES;
 
-const imageId = createUniqueInteger(1, IMAGES_COUNT);
-const imageUrl = createUniqueInteger(1, IMAGES_COUNT);
+const imageId = getOrdinalNumber(1, IMAGES_COUNT);
+const imageUrl = getOrdinalNumber(1, IMAGES_COUNT);
 
 const createImage = () => ({
   id: imageId(),
-  url: createImageUrl(imageUrl(), 'photos/', '.jpg'),
+  url: getUrl(imageUrl(), 'photos/', '.jpg'),
   description: DESCRIPTIONS[getRandomInteger(0, DESCRIPTIONS.length - 1)],
   likes: getRandomInteger(LIKES.MIN, LIKES.MAX),
   comments: getComments(getRandomInteger(COMMENTS.MIN, COMMENTS.MAX)),
