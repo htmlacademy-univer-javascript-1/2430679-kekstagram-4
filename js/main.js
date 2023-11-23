@@ -1,3 +1,3 @@
 import {getImages} from './images.js';
-import {createPictures} from './pictures.js';
-createPictures(getImages());
+import {getPictures} from './pictures.js';
+getPictures(getImages());

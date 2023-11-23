@@ -1,23 +1,32 @@
 import {isEscapeKey} from './utils.js';
+import {getData} from './data.js';
+
+const COMMENTS_STEP = getData().COMMENTS_STEP;
 
 const body = document.body;
 const fullsizePicture = document.querySelector('.big-picture');
 const closeButton = fullsizePicture.querySelector('#picture-cancel');
+const loaderButton = fullsizePicture.querySelector('.comments-loader');
+const currentComments = fullsizePicture.querySelector('.current-comments');
+const commentTemplate = document.querySelector('#social__comment').content.querySelector('.social__comment');
+
+const createComment = ({avatar, name, message}) => {
+  const commentElement = commentTemplate.cloneNode(true);
+  commentElement.querySelector('.social__picture').src = avatar;
+  commentElement.querySelector('.social__picture').alt = name;
+  commentElement.querySelector('.social__text').textContent = message;
+  commentElement.classList.add('hidden');
+  return commentElement;
+};
 
 const fillComments = (comments) => {
   const commentsContainer = fullsizePicture.querySelector('.social__comments');
-  const commentTemplate = fullsizePicture.querySelector('.social__comment');
-  const fragment = document.createDocumentFragment();
+  const commentFragments = document.createDocumentFragment();
   comments.forEach((comment) => {
-    const clonedComment = commentTemplate.cloneNode(true);
-    const {avatar, name, message} = comment;
-    clonedComment.querySelector('.social__picture').src = avatar;
-    clonedComment.querySelector('.social__picture').alt = name;
-    clonedComment.querySelector('.social__text').textContent = message;
-    fragment.append(clonedComment);
+    commentFragments.append(createComment(comment));
   });
   commentsContainer.innerHTML = '';
-  commentsContainer.append(fragment);
+  commentsContainer.append(commentFragments);
 };
 
 const closePicture = () => {
@@ -26,23 +35,39 @@ const closePicture = () => {
   document.removeEventListener('keydown', closeByEscape);
 };
 
-function closeByEscape() {//чтобы не возникала ошибка из-за использования до объявления
+function closeByEscape() {//нужно всплытие
   if (isEscapeKey) {
     closePicture();
   }
 }
 
-const openPicture = (picture) =>{
+const openComments = () => {
+  const hiddenComments = fullsizePicture.querySelectorAll('.social__comment.hidden');
+  let commentsNumber = COMMENTS_STEP;
+  if (hiddenComments.length < COMMENTS_STEP) {
+    commentsNumber = hiddenComments.length;
+  }
+  currentComments.textContent = Number(currentComments.textContent) + commentsNumber;
+  for (let i = 0; i < commentsNumber; i++) {
+    hiddenComments[i].classList.remove('hidden');
+  }
+  if (hiddenComments.length - commentsNumber === 0) {
+    fullsizePicture.querySelector('.comments-loader').classList.add('hidden');
+  }
+};
+
+const openPicture = ({url, description, likes, comments}) => {
   body.classList.add('modal-open');
   fullsizePicture.classList.remove('hidden');
-  const {url, description, likes, comments} = picture;
   fullsizePicture.querySelector('.big-picture__img img').src = url;
   fullsizePicture.querySelector('.likes-count').textContent = likes;
   fullsizePicture.querySelector('.comments-count').textContent = comments.length;
-  fillComments(picture.comments);
+  fillComments(comments);
   fullsizePicture.querySelector('.social__caption').textContent = description;
-  fullsizePicture.querySelector('.social__comment-count').classList.add('hidden');
-  fullsizePicture.querySelector('.comments-loader').classList.add('hidden');
+  fullsizePicture.querySelector('.comments-loader').classList.remove('hidden');
+  currentComments.textContent = 0;
+  openComments();
+  loaderButton.addEventListener('click', openComments);
   closeButton.addEventListener('click', closePicture);
   document.addEventListener('keydown', closeByEscape);
 };

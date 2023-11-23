@@ -19,6 +19,7 @@ const getOrdinalNumber = (numb1, numb2) => {
 
 const getUrl = (url, derictory, format) => derictory + url + format;
 
-const isEscapeKey = (evt) => evt.key === 'Escape';
+const isEscapeKey = (evt) => evt.key === 'ESC' || evt.key === 'ESCAPE';
+
 
 export {getRandomInteger, getOrdinalNumber, getUrl, isEscapeKey};
