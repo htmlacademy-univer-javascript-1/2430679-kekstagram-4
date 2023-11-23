@@ -5,7 +5,7 @@ const getRandomInteger = (numb1, numb2) => {
   return Math.floor(result);
 };
 
-const createUniqueInteger = (numb1, numb2) => {
+const getOrdinalNumber = (numb1, numb2) => {
   const previousValues = [];
   return () => {
     let currentValue = getRandomInteger(numb1, numb2);
@@ -17,6 +17,8 @@ const createUniqueInteger = (numb1, numb2) => {
   };
 };
 
-const createImageUrl = (url, derictory, format) => derictory + url + format;
+const getUrl = (url, derictory, format) => derictory + url + format;
 
-export {getRandomInteger, createUniqueInteger, createImageUrl};
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export {getRandomInteger, getOrdinalNumber, getUrl, isEscapeKey};
