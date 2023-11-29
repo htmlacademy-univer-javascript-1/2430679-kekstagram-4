@@ -38,6 +38,8 @@ const getData = () => {
 
   const COMMENTS_STEP = 5;
 
+  const MAX_HASHTAGS_COUNT = 5;
+
   const COMMENTS = {
     MIN: 0,
     MAX: 30
@@ -53,7 +55,7 @@ const getData = () => {
     MAX: 6
   };
 
-  return {DESCRIPTIONS, NAMES, MESSAGES, IMAGES_COUNT, COMMENTS_STEP, COMMENTS, LIKES, AVATARS_NUMBER};
+  return {DESCRIPTIONS, NAMES, MESSAGES, IMAGES_COUNT, COMMENTS_STEP, MAX_HASHTAGS_COUNT, COMMENTS, LIKES, AVATARS_NUMBER};
 };
 
 export {getData};
