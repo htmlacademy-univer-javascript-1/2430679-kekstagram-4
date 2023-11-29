@@ -34,12 +34,6 @@ const getData = () => {
     'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
   ];
 
-  const IMAGES_COUNT = 25;
-
-  const COMMENTS_STEP = 5;
-
-  const MAX_HASHTAGS_COUNT = 5;
-
   const COMMENTS = {
     MIN: 0,
     MAX: 30
@@ -55,7 +49,23 @@ const getData = () => {
     MAX: 6
   };
 
-  return {DESCRIPTIONS, NAMES, MESSAGES, IMAGES_COUNT, COMMENTS_STEP, MAX_HASHTAGS_COUNT, COMMENTS, LIKES, AVATARS_NUMBER};
+  const IMAGES_COUNT = 25;
+
+  const COMMENTS_STEP = 5;
+
+  const MAX_HASHTAGS_COUNT = 5;
+
+  const SCALE = {
+    MIN: 25,
+    MAX: 100
+  };
+
+  const SCALE_STEP = 25;
+
+  const DEFAULT_SCALE = 100;
+
+  return {DESCRIPTIONS, NAMES, MESSAGES, COMMENTS, LIKES, AVATARS_NUMBER, IMAGES_COUNT,
+    COMMENTS_STEP, MAX_HASHTAGS_COUNT, SCALE, SCALE_STEP, DEFAULT_SCALE};
 };
 
 export {getData};
