@@ -1,6 +1,7 @@
-
 import {isEscapeKey} from './utils.js';
 import {getData} from './data.js';
+import {resetScale} from './scale.js';
+import {resetEffect, initEffect} from './effect.js';
 
 const MAX_HASHTAGS_COUNT = getData().MAX_HASHTAGS_COUNT;
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
@@ -25,6 +26,7 @@ const pristine = new Pristine(form, {
 });
 
 const openForm = () => {
+  initEffect();
   overlay.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', closeFormByEscape);
@@ -32,6 +34,8 @@ const openForm = () => {
 
 const closeForm = () => {
   form.reset();
+  resetScale();
+  resetEffect();
   pristine.reset();
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
