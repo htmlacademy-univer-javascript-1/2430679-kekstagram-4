@@ -9,7 +9,8 @@ const createPicture = ({url, description, likes, comments}) => {
   pictureElement.querySelector('.picture__img').alt = description;
   pictureElement.querySelector('.picture__likes').textContent = likes;
   pictureElement.querySelector('.picture__comments').textContent = comments.length;
-  pictureElement.addEventListener('click', () => {
+  pictureElement.addEventListener('click', (evt) => {
+    evt.preventDefault();
     openPicture({url, description, likes, comments});
   });
   return pictureElement;
