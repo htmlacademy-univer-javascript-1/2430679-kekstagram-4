@@ -45,7 +45,7 @@ function closeFormByEscape(evt) { //всплытие
   if(isEscapeKey(evt)) {
     const activeElement = document.activeElement.attributes.type;
     if (typeof(activeElement) !== 'undefined' && activeElement.value === 'text'){
-      evt.preventDefault();
+      evt.stopPropagation();
     }
     else {
       closeForm();
