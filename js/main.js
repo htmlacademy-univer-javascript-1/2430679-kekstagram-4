@@ -1,7 +1,8 @@
 import {getPictures} from './pictures.js';
 import {getData} from './api.js';
 import './formPreview.js';
-import './pictureFilters.js';
+import './effects.js';
+import './scale.js';
 
 const loadPictures = async () => {
   try {
