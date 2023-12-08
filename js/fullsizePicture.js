@@ -1,7 +1,6 @@
 import {isEscapeKey} from './utils.js';
-import {getData} from './data.js';
 
-const COMMENTS_STEP = getData().COMMENTS_STEP;
+const COMMENTS_STEP = 5;
 
 const body = document.body;
 const fullsizePicture = document.querySelector('.big-picture');
@@ -49,7 +48,7 @@ const closePicture = () => {
   loaderButton.removeEventListener('click', openComments);
 };
 
-function closePictureByEscape(evt) {//нужно всплытие
+function closePictureByEscape(evt) {//всплытие
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     closePicture();

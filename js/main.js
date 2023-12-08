@@ -1,5 +1,17 @@
-import {getImages} from './images.js';
 import {getPictures} from './pictures.js';
-import './form.js';
+import {getData} from './api.js';
+import './forms.js';
+import './pictureFilters.js';
 
-getPictures(getImages());
+const loadPictures = async () => {
+  try {
+    getPictures(await getData());
+  }
+  catch (err){
+    const alertMessage = document.querySelector('#alert').content;
+    alertMessage.querySelector('.alert_message').textContent = err.message;
+    document.body.append(alertMessage);
+  }
+};
+
+loadPictures();
