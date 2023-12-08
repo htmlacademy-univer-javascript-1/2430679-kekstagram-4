@@ -1,6 +1,6 @@
 import {getPictures} from './pictures.js';
 import {getData} from './api.js';
-import './form.js';
+import './formPreview.js';
 import './pictureFilters.js';
 
 const loadPictures = async () => {
