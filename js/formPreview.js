@@ -1,7 +1,7 @@
 import {isEscapeKey} from './utils.js';
 import {sendData} from './api.js';
 import {showSuccessMessage, showErrorMessage} from './message.js';
-import {pristine, resetField} from './validetion.js';
+import {pristine, resetField, isTextFieldFocused} from './validetion.js';
 
 const body = document.body;
 const form = document.querySelector('.img-upload__form');
@@ -20,15 +20,10 @@ const closeForm =() => {
   pristine.reset();
 };
 
-function closeFormByEscape(evt) { //всплытие
-  if(isEscapeKey(evt)) {
-    const activeElement = document.activeElement.attributes.type;
-    if (typeof(activeElement) !== 'undefined' && activeElement.value === 'text'){
-      evt.stopPropagation();
-    }
-    else {
-      closeForm();
-    }
+function closeFormByEscape(evt) {//всплытие
+  if (isEscapeKey(evt) && !isTextFieldFocused()) {
+    evt.preventDefault();
+    closeForm();
   }
 }
 

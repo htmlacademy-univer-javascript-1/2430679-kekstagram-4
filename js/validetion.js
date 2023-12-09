@@ -13,6 +13,10 @@ const form = document.querySelector('.img-upload__form');
 const commentField = form.querySelector('.text__description');
 const hashtagsField = form.querySelector('.text__hashtags');
 
+const isTextFieldFocused = () =>
+  document.activeElement === hashtagsField ||
+  document.activeElement === commentField;
+
 const resetField = () => {
   commentField.value = '';
   hashtagsField.value = '';
@@ -53,4 +57,4 @@ pristine.addValidator(hashtagsField, validateHashtagsCount, ERROR_TEXT.INVALID_C
 pristine.addValidator(hashtagsField, validateHashtags, ERROR_TEXT.INVALID_PATTERN);
 pristine.addValidator(hashtagsField, validateHashtagsUniqueness, ERROR_TEXT.NOT_INIQUE);
 
-export {pristine, resetField};
+export {pristine, resetField, isTextFieldFocused};
