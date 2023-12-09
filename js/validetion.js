@@ -22,7 +22,6 @@ const resetField = () => {
   hashtagsField.value = '';
 };
 
-
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
   errorClass: 'img-upload--invalid',
@@ -32,24 +31,17 @@ const pristine = new Pristine(form, {
   errorTextClass: 'img-upload__error'
 });
 
+const normalizeHashtags = (hashtagString) => hashtagString.trim().split(' ').filter((tag) => Boolean(tag.length));
+
 const validateComment = (value) => value.length <= MAX_SYMBOLS_COMMENT_LENGTH;
 
-const validateHashtagsCount = (value) => value.trim().split(' ').length <= MAX_HASHTAGS_COUNT;
+const validateHashtagsCount = (value) => normalizeHashtags(value).length <= MAX_HASHTAGS_COUNT;
 
-const validateHashtags = (value) => value.trim() === '' ? true : value.trim().split(' ').every((hashtag) => hashtagRegExp.test(hashtag));
+const validateHashtags = (value) => normalizeHashtags(value).every((hashtag) => hashtagRegExp.test(hashtag));
 
 const validateHashtagsUniqueness  = (value) => {
-  const hashtags = value.trim().split(' ');
-  const tempArr = [];
-  for (let i = 0; i < hashtags.length; i++){
-    if(tempArr.includes(hashtags[i])){
-      return false;
-    }
-    else {
-      tempArr.push(hashtags[i]);
-    }
-  }
-  return true;
+  const lowerCaseTags = normalizeHashtags(value).map((tag) => tag.toLowerCase());
+  return lowerCaseTags.length === new Set(lowerCaseTags).size;
 };
 
 pristine.addValidator(commentField, validateComment, ERROR_TEXT.INVALID_LENGTH);
