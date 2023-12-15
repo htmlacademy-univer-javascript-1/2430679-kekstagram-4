@@ -1,6 +1,7 @@
 const MAX_SYMBOLS_COMMENT_LENGTH = 140;
 const MAX_HASHTAGS_COUNT = 5;
-const ERROR_TEXT = {
+
+const ErrorText = {
   INVALID_LENGTH:`Длина комментария не должна превышать ${MAX_SYMBOLS_COMMENT_LENGTH} символов`,
   INVALID_COUNT: `Допустимо не более ${MAX_HASHTAGS_COUNT} хэш-тегов`,
   NOT_INIQUE: 'Хэш-теги должны быть уникальными',
@@ -12,15 +13,6 @@ const hashtagRegExp = /^#[a-zа-яё0-9]{1,19}$/i;
 const form = document.querySelector('.img-upload__form');
 const commentField = form.querySelector('.text__description');
 const hashtagsField = form.querySelector('.text__hashtags');
-
-const isTextFieldFocused = () =>
-  document.activeElement === hashtagsField ||
-  document.activeElement === commentField;
-
-const resetField = () => {
-  commentField.value = '';
-  hashtagsField.value = '';
-};
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
@@ -44,9 +36,9 @@ const validateHashtagsUniqueness  = (value) => {
   return lowerCaseTags.length === new Set(lowerCaseTags).size;
 };
 
-pristine.addValidator(commentField, validateComment, ERROR_TEXT.INVALID_LENGTH);
-pristine.addValidator(hashtagsField, validateHashtagsCount, ERROR_TEXT.INVALID_COUNT);
-pristine.addValidator(hashtagsField, validateHashtags, ERROR_TEXT.INVALID_PATTERN);
-pristine.addValidator(hashtagsField, validateHashtagsUniqueness, ERROR_TEXT.NOT_INIQUE);
+pristine.addValidator(commentField, validateComment, ErrorText.INVALID_LENGTH);
+pristine.addValidator(hashtagsField, validateHashtagsCount, ErrorText.INVALID_COUNT);
+pristine.addValidator(hashtagsField, validateHashtags, ErrorText.INVALID_PATTERN);
+pristine.addValidator(hashtagsField, validateHashtagsUniqueness, ErrorText.NOT_INIQUE);
 
-export {pristine, resetField, isTextFieldFocused};
+export {pristine};

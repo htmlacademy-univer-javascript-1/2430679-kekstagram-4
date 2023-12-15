@@ -1,7 +1,7 @@
 import {isEscapeKey} from './utils.js';
 import {sendData} from './api.js';
 import {showSuccessMessage, showErrorMessage} from './message.js';
-import {pristine, resetField, isTextFieldFocused} from './validetion.js';
+import {pristine} from './validetion.js';
 
 const body = document.body;
 const form = document.querySelector('.img-upload__form');
@@ -10,6 +10,16 @@ const closeButton = form.querySelector('.img-upload__cancel');
 const pictureOverlay = form.querySelector('.img-upload__overlay');
 const picturePreview = document.querySelector('.img-upload__preview img');
 const submitButton = form.querySelector('.img-upload__submit');
+const commentField = form.querySelector('.text__description');
+const hashtagsField = form.querySelector('.text__hashtags');
+
+const isTextFieldFocused = () =>
+  document.activeElement === hashtagsField || document.activeElement === commentField;
+
+const resetField = () => {
+  commentField.value = '';
+  hashtagsField.value = '';
+};
 
 const closeForm =() => {
   body.classList.remove('modal-open');

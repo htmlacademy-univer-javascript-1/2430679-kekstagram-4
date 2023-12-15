@@ -13,12 +13,6 @@ const hideMessage = () => {
   message.remove();
 };
 
-function closeMessageByBodyClick(evt) {//всплытие
-  if (!(evt.target.closest('.success__inner') || evt.target.closest('.error__inner'))) {
-    hideMessage();
-  }
-}
-
 function closeMessageByEscape(evt) {//всплытие
   if (isEscapeKey(evt)) {
     evt.preventDefault();
@@ -26,8 +20,14 @@ function closeMessageByEscape(evt) {//всплытие
   }
 }
 
-const showMessage = (messageElement, messageCloseButton) => {
-  body.append(messageElement);
+function closeMessageByBodyClick(evt) {//всплытие
+  if (!(evt.target.closest('.success__inner') || evt.target.closest('.error__inner'))) {
+    hideMessage();
+  }
+}
+
+const showMessage = (message, messageCloseButton) => {
+  body.append(message);
   document.addEventListener('keydown', closeMessageByEscape);
   body.addEventListener('click', closeMessageByBodyClick);
   body.querySelector(messageCloseButton).addEventListener('click', hideMessage);
