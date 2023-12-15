@@ -1,8 +1,8 @@
 import {isEscapeKey} from './utils.js';
 
 const body = document.body;
-const successMessage = document.querySelector('#success').content;
-const errorMessage = document.querySelector('#error').content;
+const successMessage = document.querySelector('#success').content.querySelector('.success');
+const errorMessage = document.querySelector('#error').content.querySelector('.error');
 
 const hideMessage = () => {
   const message = document.querySelector('.success') || document.querySelector('.error');
