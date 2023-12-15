@@ -31,7 +31,8 @@ const closeForm =() => {
 };
 
 function closeFormByEscape(evt) {//всплытие
-  if (isEscapeKey(evt) && !isTextFieldFocused()) {
+  const errorMessage = document.querySelector('.error');
+  if (isEscapeKey(evt) && !isTextFieldFocused() && !errorMessage) {
     evt.preventDefault();
     closeForm();
   }
