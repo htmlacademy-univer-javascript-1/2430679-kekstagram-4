@@ -54,10 +54,11 @@ form.addEventListener('submit', async (evt) => {
     await sendData(new FormData(form))
       .then(() => {
         showSuccessMessage();
+        closeForm();
         resetField();
       })
       .catch(() => showErrorMessage());
     submitButton.disabled = false;
-    closeForm();
+
   }
 });
