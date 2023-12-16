@@ -1,27 +1,23 @@
-import {getData} from './data.js';
-
-const SCALE = getData().SCALE;
-const SCALE_STEP = getData().SCALE_STEP;
-const DEFAULT_SCALE = getData().DEFAULT_SCALE;
-
-const modalElement = document.querySelector('.img-upload');
-const smallerButtonElement = modalElement.querySelector('.scale__control--smaller');
-const biggerButtonElement = modalElement.querySelector('.scale__control--bigger');
-const scaleInputElement = modalElement.querySelector('.scale__control--value');
-const imageElement = modalElement.querySelector('.img-upload__preview img');
-
-const scaleImage = (value) => {
-  imageElement.style.transform = `scale(${value / 100})`;
-  scaleInputElement.value = `${value}%`;
+const SCALE = {
+  MIN: 25,
+  MAX: 100,
+  STEP: 25,
+  DEFAULT: 100
 };
 
-const onSmallerButtonClick = () => scaleImage(Math.max(parseInt(scaleInputElement.value, 10) - SCALE_STEP, SCALE.MIN));
+const smallerButton = document.querySelector('.scale__control--smaller');
+const biggerButton = document.querySelector('.scale__control--bigger');
+const scaleInput = document.querySelector('.scale__control--value');
+const imageElement = document.querySelector('.img-upload__preview img');
 
-const onBiggerButtonClick = () => scaleImage(Math.min(parseInt(scaleInputElement.value, 10) + SCALE_STEP, SCALE.MAX));
+const scaleImage = (value) => {
+  imageElement.style.transform = `scale(${value / SCALE.DEFAULT})`;
+  scaleInput.value = `${value}%`;
+};
 
-const resetScale = () => scaleImage(DEFAULT_SCALE);
+const onSmallerButtonClick = () => scaleImage(Math.max(parseInt(scaleInput.value, 10) - SCALE.STEP, SCALE.MIN));
 
-smallerButtonElement.addEventListener('click', onSmallerButtonClick);
-biggerButtonElement.addEventListener('click', onBiggerButtonClick);
+const onBiggerButtonClick = () => scaleImage(Math.min(parseInt(scaleInput.value, 10) + SCALE.STEP, SCALE.MAX));
 
-export {resetScale};
+smallerButton.addEventListener('click', onSmallerButtonClick);
+biggerButton.addEventListener('click', onBiggerButtonClick);
