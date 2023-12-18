@@ -1,8 +1,8 @@
 import {isEscapeKey} from './utils.js';
 
 const body = document.body;
-const successMessage = document.querySelector('#success').content;
-const errorMessage = document.querySelector('#error').content;
+const successMessage = document.querySelector('#success').content.querySelector('.success');
+const errorMessage = document.querySelector('#error').content.querySelector('.error');
 
 const hideMessage = () => {
   const message = document.querySelector('.success') || document.querySelector('.error');
@@ -13,12 +13,6 @@ const hideMessage = () => {
   message.remove();
 };
 
-function closeMessageByBodyClick(evt) {//всплытие
-  if (!(evt.target.closest('.success__inner') || evt.target.closest('.error__inner'))) {
-    hideMessage();
-  }
-}
-
 function closeMessageByEscape(evt) {//всплытие
   if (isEscapeKey(evt)) {
     evt.preventDefault();
@@ -26,8 +20,14 @@ function closeMessageByEscape(evt) {//всплытие
   }
 }
 
-const showMessage = (messageElement, messageCloseButton) => {
-  body.append(messageElement);
+function closeMessageByBodyClick(evt) {//всплытие
+  if (!(evt.target.closest('.success__inner') || evt.target.closest('.error__inner'))) {
+    hideMessage();
+  }
+}
+
+const showMessage = (message, messageCloseButton) => {
+  body.append(message.cloneNode(true));
   document.addEventListener('keydown', closeMessageByEscape);
   body.addEventListener('click', closeMessageByBodyClick);
   body.querySelector(messageCloseButton).addEventListener('click', hideMessage);
