@@ -27,7 +27,7 @@ function closeMessageByBodyClick(evt) {//всплытие
 }
 
 const showMessage = (message, messageCloseButton) => {
-  body.append(message);
+  body.append(message.cloneNode(true));
   document.addEventListener('keydown', closeMessageByEscape);
   body.addEventListener('click', closeMessageByBodyClick);
   body.querySelector(messageCloseButton).addEventListener('click', hideMessage);

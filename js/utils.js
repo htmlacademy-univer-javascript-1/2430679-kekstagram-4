@@ -1,3 +1,5 @@
+const DELAY = 500;
+
 const getRandomInteger = (numb1, numb2) => {
   const lower = Math.ceil(Math.min(numb1, numb2));
   const upper = Math.floor(Math.max(numb1, numb2));
@@ -24,7 +26,8 @@ const isEscapeKey = (evt) => evt.key === 'Escape';
 // Функция взята из интернета и доработана
 // Источник - https://www.freecodecamp.org/news/javascript-debounce-example
 
-function debounce (callback, timeoutDelay = 500) {
+
+function debounce (callback, timeoutDelay = DELAY) {
   // Используем замыкания, чтобы id таймаута у нас навсегда приклеился
   // к возвращаемой функции с setTimeout, тогда мы его сможем перезаписывать
   let timeoutId;

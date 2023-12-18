@@ -14,6 +14,11 @@ const form = document.querySelector('.img-upload__form');
 const commentField = form.querySelector('.text__description');
 const hashtagsField = form.querySelector('.text__hashtags');
 
+const resetField = () => {
+  commentField.value = '';
+  hashtagsField.value = '';
+};
+
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
   errorClass: 'img-upload--invalid',
