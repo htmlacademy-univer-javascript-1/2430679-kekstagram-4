@@ -3,6 +3,8 @@ import {sendData} from './api.js';
 import {showSuccessMessage, showErrorMessage} from './message.js';
 import {pristine} from './validetion.js';
 
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
+
 const body = document.body;
 const form = document.querySelector('.img-upload__form');
 const pictureUploadInput = form.querySelector('.img-upload__input');
@@ -12,6 +14,8 @@ const picturePreview = document.querySelector('.img-upload__preview img');
 const submitButton = form.querySelector('.img-upload__submit');
 const commentField = form.querySelector('.text__description');
 const hashtagsField = form.querySelector('.text__hashtags');
+const pictureFile = document.querySelector('.img-upload__start input[type=file]');
+const effectsPreviews = document.querySelectorAll('.effects__list .effects__preview');
 
 const isTextFieldFocused = () =>
   document.activeElement === hashtagsField || document.activeElement === commentField;
@@ -48,6 +52,18 @@ pictureUploadInput.addEventListener('change', () => {
   document.addEventListener('keydown', closeFormByEscape);
 });
 
+const isValidType = (file) => FILE_TYPES.some((it) => file.name.toLowerCase().endsWith(it));
+
+pictureFile.addEventListener('change', () => {
+  const file = pictureFile.files[0];
+  if (file && isValidType(file)) {
+    picturePreview.src = URL.createObjectURL(file);
+    effectsPreviews.forEach((element) => {
+      element.style.backgroundImage = `url(${picturePreview.src})`;
+    });
+  }
+});
+
 form.addEventListener('submit', async (evt) => {
   evt.preventDefault();
   if (pristine.validate()) {
@@ -60,6 +76,5 @@ form.addEventListener('submit', async (evt) => {
       })
       .catch(() => showErrorMessage());
     submitButton.disabled = false;
-
   }
 });
