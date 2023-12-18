@@ -18,7 +18,6 @@ const resetField = () => {
   hashtagsField.value = '';
 };
 
-
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
   errorClass: 'img-upload--invalid',

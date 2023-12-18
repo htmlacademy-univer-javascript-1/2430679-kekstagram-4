@@ -11,7 +11,7 @@ const pictureOverlay = form.querySelector('.img-upload__overlay');
 const picturePreview = document.querySelector('.img-upload__preview img');
 const submitButton = form.querySelector('.img-upload__submit');
 
-const closeForm =() => {
+const closeForm = () => {
   body.classList.remove('modal-open');
   pictureOverlay.classList.add('hidden');
   closeButton.removeEventListener('click', closeForm);
@@ -51,7 +51,10 @@ form.addEventListener('submit', async (evt) => {
         showSuccessMessage();
         resetField();
       })
-      .catch(() => showErrorMessage());
+      .catch(() => {
+        showErrorMessage();
+        closeForm();
+      });
     submitButton.disabled = false;
     closeForm();
   }
