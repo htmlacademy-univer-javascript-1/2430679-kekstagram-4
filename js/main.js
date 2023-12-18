@@ -1,12 +1,12 @@
-import {getPictures} from './pictures.js';
 import {getData} from './api.js';
+import {showFilteredPhotos} from './filters.js';
 import './formPreview.js';
 import './effects.js';
 import './scale.js';
 
 const loadPictures = async () => {
   try {
-    getPictures(await getData());
+    showFilteredPhotos(await getData());
   }
   catch (err){
     const alertMessage = document.querySelector('#alert').content;
