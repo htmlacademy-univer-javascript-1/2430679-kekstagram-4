@@ -25,7 +25,7 @@ const resetField = () => {
   hashtagsField.value = '';
 };
 
-const closeForm =() => {
+const closeForm = () => {
   body.classList.remove('modal-open');
   pictureOverlay.classList.add('hidden');
   closeButton.removeEventListener('click', closeForm);
@@ -64,7 +64,6 @@ pictureFile.addEventListener('change', () => {
   }
 });
 
-
 form.addEventListener('submit', async (evt) => {
   evt.preventDefault();
   if (pristine.validate()) {
@@ -72,10 +71,13 @@ form.addEventListener('submit', async (evt) => {
     await sendData(new FormData(form))
       .then(() => {
         showSuccessMessage();
+        closeForm();
         resetField();
       })
-      .catch(() => showErrorMessage());
+      .catch(() => {
+        showErrorMessage();
+        closeForm();
+      });
     submitButton.disabled = false;
-    closeForm();
   }
 });
