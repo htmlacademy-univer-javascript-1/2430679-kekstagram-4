@@ -25,7 +25,7 @@ const resetField = () => {
   hashtagsField.value = '';
 };
 
-const closeForm =() => {
+const closeForm = () => {
   body.classList.remove('modal-open');
   pictureOverlay.classList.add('hidden');
   closeButton.removeEventListener('click', closeForm);
@@ -74,7 +74,10 @@ form.addEventListener('submit', async (evt) => {
         closeForm();
         resetField();
       })
-      .catch(() => showErrorMessage());
+      .catch(() => {
+        showErrorMessage();
+        closeForm();
+      });
     submitButton.disabled = false;
   }
 });
