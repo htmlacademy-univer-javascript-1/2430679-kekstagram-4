@@ -1,6 +1,7 @@
 const MAX_SYMBOLS_COMMENT_LENGTH = 140;
 const MAX_HASHTAGS_COUNT = 5;
-const ERROR_TEXT = {
+
+const ErrorText = {
   INVALID_LENGTH:`Длина комментария не должна превышать ${MAX_SYMBOLS_COMMENT_LENGTH} символов`,
   INVALID_COUNT: `Допустимо не более ${MAX_HASHTAGS_COUNT} хэш-тегов`,
   NOT_INIQUE: 'Хэш-теги должны быть уникальными',
@@ -27,29 +28,22 @@ const pristine = new Pristine(form, {
   errorTextClass: 'img-upload__error'
 });
 
+const normalizeHashtags = (hashtagString) => hashtagString.trim().split(' ').filter((tag) => Boolean(tag.length));
+
 const validateComment = (value) => value.length <= MAX_SYMBOLS_COMMENT_LENGTH;
 
-const validateHashtagsCount = (value) => value.trim().split(' ').length <= MAX_HASHTAGS_COUNT;
+const validateHashtagsCount = (value) => normalizeHashtags(value).length <= MAX_HASHTAGS_COUNT;
 
-const validateHashtags = (value) => value.trim() === '' ? true : value.trim().split(' ').every((hashtag) => hashtagRegExp.test(hashtag));
+const validateHashtags = (value) => normalizeHashtags(value).every((hashtag) => hashtagRegExp.test(hashtag));
 
 const validateHashtagsUniqueness  = (value) => {
-  const hashtags = value.trim().split(' ');
-  const tempArr = [];
-  for (let i = 0; i < hashtags.length; i++){
-    if(tempArr.includes(hashtags[i])){
-      return false;
-    }
-    else {
-      tempArr.push(hashtags[i]);
-    }
-  }
-  return true;
+  const lowerCaseTags = normalizeHashtags(value).map((tag) => tag.toLowerCase());
+  return lowerCaseTags.length === new Set(lowerCaseTags).size;
 };
 
-pristine.addValidator(commentField, validateComment, ERROR_TEXT.INVALID_LENGTH);
-pristine.addValidator(hashtagsField, validateHashtagsCount, ERROR_TEXT.INVALID_COUNT);
-pristine.addValidator(hashtagsField, validateHashtags, ERROR_TEXT.INVALID_PATTERN);
-pristine.addValidator(hashtagsField, validateHashtagsUniqueness, ERROR_TEXT.NOT_INIQUE);
+pristine.addValidator(commentField, validateComment, ErrorText.INVALID_LENGTH);
+pristine.addValidator(hashtagsField, validateHashtagsCount, ErrorText.INVALID_COUNT);
+pristine.addValidator(hashtagsField, validateHashtags, ErrorText.INVALID_PATTERN);
+pristine.addValidator(hashtagsField, validateHashtagsUniqueness, ErrorText.NOT_INIQUE);
 
-export {pristine, resetField};
+export {pristine};
